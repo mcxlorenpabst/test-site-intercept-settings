@@ -9,7 +9,13 @@ class Home extends Component {
     return (
       <div className="home">
 
-          Home Page
+        <div className='home_landing_img'>
+          <div className='home_landing_words'>
+            <p>Sustainable Growth</p>
+            <p>Innovation That Excites</p>
+          </div>
+        </div>
+        
 
       </div>
     );

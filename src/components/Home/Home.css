@@ -4,4 +4,45 @@
     position: relative;
 }
 
+.home_landing_img{
+    width: 100%;
+    height: calc(100vh - 60px);
+    background: url('https://www.maritzcx.com/wp-content/uploads/2014/10/customers-background.png?id=48')center no-repeat;
+    background-size: cover;
+}
 
+.home_landing_words{
+    width: 500px;
+    height: 200px;
+    position: absolute;
+    left: calc(50% - 150px);
+    top: calc(50% - 100px);
+}
+
+.home_landing_words p{
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+    background: #f5921e;
+}
+
+.home_landing_words p:nth-child(1){
+    width: 340px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: #f5921e;
+    background: #fff;
+}
+
+.home_landing_words p:nth-child(2){
+    text-align: right;
+    padding-right: 10px;
+    width: 420px;
+    height: 40px;
+    margin-left: 80px;
+    line-height: 40px;
+}

@@ -22,7 +22,7 @@
 .header ul{
     width: 350px;
     position: absolute;
-    right: 50px;
+    left: calc(50% - 150px);
     height: 60px;
     line-height: 60px;
     display: flex;
@@ -32,11 +32,12 @@
 .header a{
     color: black;
     text-decoration: none;
-    background: #ccc;
     cursor: pointer;
     padding: 0px 30px;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .header a:hover{
-    background: #bbb;
+    background: #ddd;
 }
