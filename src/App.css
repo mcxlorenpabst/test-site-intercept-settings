@@ -4,3 +4,49 @@
   padding-top: 60px;
 }
 
+.settings{
+  width: 500px;
+  height: 400px;
+  background: #eee;
+  position: fixed;
+  top: calc(50% - 240px);
+  left: calc(50% - 250px);
+  padding: 50px 15px 0px 15px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px black;
+}
+
+.settings_close{
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.setting_wrapper{
+  width: 100%;
+  position: relative;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #888;
+}
+
+.settings_input_long{
+  width: 450px;
+  padding-left: 3px;
+  display: inline-block;
+}
+
+.settings_input_number{
+  width: 50px;
+  display: inline-block;
+}
+
+.setting_wrapper p{
+  margin: 0px 2px 2px 0px;
+  display: inline-block;
+}
