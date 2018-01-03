@@ -4,24 +4,33 @@ class Customer extends Component {
   constructor(props){
     super(props);
     this.state = {
-      showFront: true
+      customerLogoShowing: true
     }
+
+    this.slideCustomerUp = this.slideCustomerUp.bind(this);
+    this.slideCustomerDown = this.slideCustomerDown.bind(this);
   }
 
-  handleFlip(){
+  slideCustomerUp(){
     this.setState({
-      showFront: !this.state.showFront
+      customerLogoShowing: false
+    })
+  }
+
+  slideCustomerDown(){
+    this.setState({
+      customerLogoShowing: true
     })
   }
 
   render() {
+    let customerInnerTop = this.state.customerLogoShowing ? '0px' : '-180px';
     return (
-      <section className='customer' onMouseOver={() => this.handleFlip} >
-        {
-          this.state.showFront ? 
-            <img src={this.props.imgSrc} alt='customer img' />
-          : <p>MaritzCX</p>
-        }
+      <section className='customer' onMouseEnter={this.slideCustomerUp}  onMouseLeave={this.slideCustomerDown} >
+        <section className='customer_inner' style={{top: customerInnerTop}}>
+          <img src={this.props.imgSrc} alt='customer img' />
+          <img src={this.props.bottomImg} alt='customer img' className='customer_bottom_img' />
+        </section>
       </section>
     );
   }
