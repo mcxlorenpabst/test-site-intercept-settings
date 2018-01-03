@@ -7,7 +7,7 @@
 .settings{
   width: 500px;
   height: 400px;
-  background: #eee;
+  background: #ccc;
   position: fixed;
   top: calc(50% - 240px);
   left: calc(50% - 250px);
@@ -49,4 +49,25 @@
 .setting_wrapper p{
   margin: 0px 2px 2px 0px;
   display: inline-block;
+}
+
+.settings_save{
+  width: 180px;
+  height: 30px;
+  line-height: 30px;
+  position: absolute;
+  bottom: 30px;
+  left: 160px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  background: #f5921e;
+  color: white;
+  border-radius: 4px;
+  box-shadow: 1px 1px 2px black;
+  cursor: pointer;
+}
+
+.settings_save:active{
+  box-shadow: inset 1px 1px 2px black;
 }

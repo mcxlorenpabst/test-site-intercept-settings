@@ -5,7 +5,6 @@ import Header from './components/Header/Header.js';
 import './reset.css';
 import './App.css';
 
-
 class App extends Component {
   constructor(props){
     super(props);
@@ -17,14 +16,31 @@ class App extends Component {
       probability: 5, 
       width: 900, 
       height: 600, 
-      expireDaysIfYes: 84, 
-      expireDaysIfNo: 42, 
+      expireDaysIfYes: 60, 
+      expireDaysIfNo: 45, 
       delay: 3000, 
+      pageVisit: 4,
       enabled: true
     }
 
     this.toggleSettingsModal = this.toggleSettingsModal.bind(this);
     this.closeSettingsModal = this.closeSettingsModal.bind(this);
+    this.resetSurvey = this.resetSurvey.bind(this);
+  }
+
+  componentDidMount(){
+    window.mcxSiteInterceptParameters = {
+      surveyURL: this.state.surveyURL, 
+      showOnLoad: this.state.showOnLoad, 
+      invitationID: this.state.invitationID, 
+      probability: this.state.probability, 
+      width: this.state.width, 
+      height: this.state.height, 
+      expireDaysIfYes: this.state.expireDaysIfYes, 
+      expireDaysIfNo: this.state.expireDaysIfNo, 
+      delay: this.state.delay, 
+      enabled: this.state.enabled
+    }
   }
 
   toggleSettingsModal(){
@@ -37,6 +53,23 @@ class App extends Component {
     this.setState({
       showSettingsModal: false
     })
+  }
+
+  resetSurvey(){
+    window.mcxSiteInterceptParameters = {
+      surveyURL: this.state.surveyURL, 
+      showOnLoad: this.state.showOnLoad, 
+      invitationID: this.state.invitationID, 
+      probability: this.state.probability, 
+      width: this.state.width, 
+      height: this.state.height, 
+      expireDaysIfYes: this.state.expireDaysIfYes, 
+      expireDaysIfNo: this.state.expireDaysIfNo, 
+      delay: this.state.delay, 
+      enabled: this.state.enabled
+    }
+    // clear cookies, reset page visit, etc...
+    this.closeSettingsModal();
   }
 
   render() {
@@ -71,6 +104,11 @@ class App extends Component {
               </div>
 
               <div className='setting_wrapper'>
+                <p>Page Visit:</p>
+                <input className='settings_input_number' value={this.state.pageVisit} onChange={(e) => this.setState({pageVisit: e.target.value})} type='number' />
+              </div>
+
+              <div className='setting_wrapper'>
                 <p>Delay (in seconds):</p>
                 <input className='settings_input_number' value={this.state.delay/1000} onChange={(e) => this.setState({delay: (e.target.value * 1000)})} type='number' />
               </div>
@@ -93,6 +131,8 @@ class App extends Component {
                 <input className='settings_input_number' value={this.state.height} onChange={(e) => this.setState({height: e.target.value})} type='number' />
               </div>
 
+              <div className='settings_save' onClick={this.resetSurvey} >Save & Close</div>
+
             </div>
           : null
         }
@@ -101,6 +141,5 @@ class App extends Component {
     );
   }
 }
-
 
 export default App;
