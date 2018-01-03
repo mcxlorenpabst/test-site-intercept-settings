@@ -1,0 +1,52 @@
+
+.about{
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+.about_header_img{
+    width: 100%;
+    height: 350px;
+    background: url('https://www.maritzcx.com/wp-content/uploads/2014/10/OurStory_Overlay-e1481926735816.jpg?id=1342')center no-repeat;
+    background-size: cover;
+    font-size: 48px;
+    color: white;
+    text-align: center;
+    padding-top: 130px;
+}
+
+.about_green_box{
+    width: 100%;
+    height: 600px;
+    background: #8ac452;
+    position: relative;
+}
+
+.about_green_header{
+    width: 800px;
+    font-size: 48px;
+    color: white;
+    position: absolute;
+    top: 50px;
+    left: calc(50% - 400px);
+    font-weight: lighter;
+}
+
+.about_green_left{
+    width: 450px;
+    position: absolute;
+    left: calc(50% - 470px);
+    top: 160px;
+    font-size: 16px;
+    line-height: 30px;
+}
+
+.about_green_right{
+    width: 450px;
+    position: absolute;
+    left: calc(50% + 20px);
+    top: 160px;
+    font-size: 16px;
+    line-height: 30px;
+}
