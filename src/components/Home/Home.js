@@ -11,8 +11,8 @@ class Home extends Component {
 
         <div className='home_landing_img'>
           <div className='home_landing_words'>
-            <p>Sustainable Growth</p>
-            <p>Innovation That Excites</p>
+            <p>Customer Experience</p>
+            <p>Data Driven Results</p>
           </div>
         </div>
         
