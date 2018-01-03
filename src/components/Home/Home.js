@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-
 import './Home.css';
 
+import Customer from './Customer/Customer.js';
 
 class Home extends Component {
 
@@ -16,6 +16,16 @@ class Home extends Component {
           </div>
         </div>
         
+        <div className='home_customers'>
+          <div className='home_customers_inner'>
+            <Customer imgSrc='https://www.maritzcx.com/wp-content/uploads/2014/10/sanofi.png' />
+            <Customer imgSrc='https://www.maritzcx.com/wp-content/uploads/2014/10/reliant.png' />
+            <Customer imgSrc='https://www.maritzcx.com/wp-content/uploads/2014/10/quantas.png' />
+            <Customer imgSrc='https://www.maritzcx.com/wp-content/uploads/2014/10/drager.png' />
+            <Customer imgSrc='https://www.maritzcx.com/wp-content/uploads/2014/10/GM_LOGO.png' />
+            <Customer imgSrc='https://www.maritzcx.com/wp-content/uploads/2014/10/sanofi.png' />
+          </div>
+        </div>
 
       </div>
     );

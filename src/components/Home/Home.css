@@ -9,6 +9,7 @@
     height: calc(100vh - 60px);
     background: url('https://www.maritzcx.com/wp-content/uploads/2014/10/customers-background.png?id=48')center no-repeat;
     background-size: cover;
+    position: relative;
 }
 
 .home_landing_words{
@@ -45,4 +46,32 @@
     height: 40px;
     margin-left: 80px;
     line-height: 40px;
+}
+
+.home_customers{
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    background: url('https://www.maritzcx.com/blog/wp-content/uploads/2017/08/pexels-photo-97079.jpeg')center no-repeat;
+    background-size: cover;
+}
+
+.home_customers_inner{
+    width: 800px;
+    height: 600px;
+    position: absolute;
+    left: calc(50% - 400px);
+    top: calc(50% - 300px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.customer{
+    width: 240px;
+    height: 180px;
+    background: white;
+    border-radius: 3px;
+    box-shadow: 2px 2px 4px black;
+    padding: 60px 0px 0px 40px;
 }
