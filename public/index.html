@@ -6,6 +6,12 @@
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <script>
+      // Setting this to false here prevents the site intercept script from creating a cookie unnecessarily. 
+      window.mcxSiteInterceptParameters = {
+        enabled: false
+      }
+    </script>
     <script src="https://siteintercept.allegiancetech.com/InterceptScripts/mcxSiteIntercept-1.6.4.js"></script> 
     <title>Site Intercept Test Site</title>
   </head>

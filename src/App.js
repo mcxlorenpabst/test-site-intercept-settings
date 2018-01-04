@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import router from './router';
+
 import Header from './components/Header/Header.js';
+import SurveyInvite from './components/SurveyInvite/SurveyInvite.js';
 
 import './reset.css';
 import './App.css';
@@ -9,11 +11,11 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      showSettingsModal: true,
+      showSettingsModal: false,
       surveyURL: "https://alias.allegiancetech.com/cgi-bin/qwebcorporate.dll?idx=SXWD5F", 
-      showOnLoad: false, 
+      showOnLoad: true, 
       invitationID: 'mcxInviteModal', 
-      probability: 5, 
+      probability: 100, 
       width: 900, 
       height: 600, 
       expireDaysIfYes: 60, 
@@ -29,18 +31,7 @@ class App extends Component {
   }
 
   componentDidMount(){
-    window.mcxSiteInterceptParameters = {
-      surveyURL: this.state.surveyURL, 
-      showOnLoad: this.state.showOnLoad, 
-      invitationID: this.state.invitationID, 
-      probability: this.state.probability, 
-      width: this.state.width, 
-      height: this.state.height, 
-      expireDaysIfYes: this.state.expireDaysIfYes, 
-      expireDaysIfNo: this.state.expireDaysIfNo, 
-      delay: this.state.delay, 
-      enabled: this.state.enabled
-    }
+    this.saveSiteInterceptParametersToWindow();
   }
 
   toggleSettingsModal(){
@@ -55,7 +46,7 @@ class App extends Component {
     })
   }
 
-  resetSurvey(){
+  saveSiteInterceptParametersToWindow(){
     window.mcxSiteInterceptParameters = {
       surveyURL: this.state.surveyURL, 
       showOnLoad: this.state.showOnLoad, 
@@ -68,6 +59,10 @@ class App extends Component {
       delay: this.state.delay, 
       enabled: this.state.enabled
     }
+  }
+
+  resetSurvey(){
+    this.saveSiteInterceptParametersToWindow();
     // clear cookies, reset page visit, etc...
     this.closeSettingsModal();
   }
@@ -78,6 +73,8 @@ class App extends Component {
 
         <Header toggleSettingsModal={this.toggleSettingsModal} />
         { router }
+
+        <SurveyInvite />
 
         {
           this.state.showSettingsModal ? 
