@@ -32,6 +32,7 @@ class App extends Component {
     this.toggleSettingsModal = this.toggleSettingsModal.bind(this);
     this.closeSettingsModal = this.closeSettingsModal.bind(this);
     this.saveSettings = this.saveSettings.bind(this);
+    this.acceptSurvey = this.acceptSurvey.bind(this);
   }
 
   componentDidMount(){
@@ -163,6 +164,21 @@ class App extends Component {
     this.closeSettingsModal();
   }
 
+  acceptSurvey(){
+    if (this.state.openSurveyType === 'New Tab'){
+      let params = window.McxSiteInterceptOnExit.parameters;
+      window.McxSiteInterceptOnExit.createCookie(
+        ('mcxSurveyQuarantine' + params.cookieID),
+        ('mcxSurveyQuarantine' + params.cookieID),
+        params.expireDaysIfYes);
+      var inv = document.getElementById(params.invitationID);
+      if (inv) { inv.style.display = 'none'; }
+      window.open(params.surveyURL);
+    }else{
+        window.McxSiteInterceptOnExit.acceptSurvey();
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -171,7 +187,7 @@ class App extends Component {
 
         { router }
 
-        <SurveyInvite />
+        <SurveyInvite acceptSurvey={this.acceptSurvey} />
 
         {
           this.state.showSettingsModal ? 
@@ -185,8 +201,8 @@ class App extends Component {
               </div>
 
               <div className='setting_wrapper'>
-                <p>Wait Until Close:</p>
-                <select value={this.state.waitUntilClose} onChange={(e) => this.setState({waitUntilClose: e.target.value})} >
+                <p>Enabled:</p>
+                <select value={this.state.enabled} onChange={(e) => this.setState({enabled: e.target.value})} >
                   <option>true</option>
                   <option>false</option>
                 </select>
@@ -208,14 +224,6 @@ class App extends Component {
               </div>
 
               <div className='setting_wrapper'>
-                <p>Enabled:</p>
-                <select value={this.state.enabled} onChange={(e) => this.setState({enabled: e.target.value})} >
-                  <option>true</option>
-                  <option>false</option>
-                </select>
-              </div>
-
-              <div className='setting_wrapper'>
                 <p>Open Survey In:</p>
                 <select value={this.state.openSurveyType} onChange={(e) => this.updateOpenSurveyType(e)} >
                   <option>New Tab</option>
@@ -226,10 +234,22 @@ class App extends Component {
               {
                 this.state.openSurveyType === 'New Tab' ? null
                 : <div className='setting_wrapper'>
+                    <p>Wait Until Close:</p>
+                    <select value={this.state.waitUntilClose} onChange={(e) => this.setState({waitUntilClose: e.target.value})} >
+                      <option>true</option>
+                      <option>false</option>
+                    </select>
+                  </div>
+              }
+
+              {
+                this.state.openSurveyType === 'New Tab' ? null
+                : <div className='setting_wrapper'>
                     <p>Survey Width (pixels):</p>
                     <input className='settings_input_number' value={this.state.width} onChange={(e) => this.setState({width: e.target.value})} type='number' />
                   </div>
               }
+
               {
                 this.state.openSurveyType === 'New Tab' ? null
                 : <div className='setting_wrapper'>
