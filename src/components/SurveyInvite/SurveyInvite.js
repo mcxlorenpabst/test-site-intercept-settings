@@ -8,10 +8,16 @@ class SurveyInvite extends Component {
     this.state = {
       showModal: false,
     }
+
+    this.acceptSurvey = this.acceptSurvey.bind(this);
   }
 
   componentDidMount(){
     window.McxSiteInterceptOnExit.onPageLoad();
+  }
+
+  acceptSurvey(){
+    window.McxSiteInterceptOnExit.acceptSurvey();
   }
 
   render() {
@@ -26,7 +32,7 @@ class SurveyInvite extends Component {
 
             <p className='modal_words'>Will you help us improve your experience by taking a short 30 second survey?</p>
 
-            <div className='modal_yes_wrapper' onClick={window.McxSiteInterceptOnExit.acceptSurvey}>
+            <div className='modal_yes_wrapper' onClick={this.acceptSurvey}>
               <a className='modal_yes' href='https://alias.allegiancetech.com/cgi-bin/qwebcorporate.dll?idx=SXWD5F' target='_blank' rel="noopener noreferrer">Yes</a>
             </div>
 

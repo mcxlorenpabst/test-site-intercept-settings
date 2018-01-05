@@ -25,19 +25,19 @@ class App extends Component {
       expireDaysIfYes: 60,
       expireDaysIfNo: 30,
       enabled: true,
+      McxPageVisit: 1
     }
 
     this.toggleSettingsModal = this.toggleSettingsModal.bind(this);
     this.closeSettingsModal = this.closeSettingsModal.bind(this);
-    this.deleteCookie = this.deleteCookie.bind(this);
-    this.resetPageCount = this.resetPageCount.bind(this);
     this.saveSettings = this.saveSettings.bind(this);
   }
 
   componentDidMount(){
-    this.saveSiteInterceptParametersToWindow();
-    document.cookie = "McxPageVisit=1";
+    this.setInitialSiteInterceptParameters();
     window.McxSiteInterceptOnExit.onPageLoad();
+    this.resetPageCount();
+    delete sessionStorage.mcxRandom;
   }
 
   toggleSettingsModal(){
@@ -48,8 +48,38 @@ class App extends Component {
 
   closeSettingsModal(){
     this.setState({
-      showSettingsModal: false
+      showSettingsModal: false,
+      surveyURL: window.McxSiteInterceptOnExit.parameters.surveyURL,
+      waitUntilClose: window.McxSiteInterceptOnExit.parameters.waitUntilClose,
+      invitationID: window.McxSiteInterceptOnExit.parameters.invitationID,
+      probability: window.McxSiteInterceptOnExit.parameters.probability,
+      width: window.McxSiteInterceptOnExit.parameters.width,
+      height: window.McxSiteInterceptOnExit.parameters.height,
+      expireDaysIfYes: window.McxSiteInterceptOnExit.parameters.expireDaysIfYes,
+      expireDaysIfNo: window.McxSiteInterceptOnExit.parameters.expireDaysIfNo,
+      delay: window.McxSiteInterceptOnExit.parameters.delay,
+      pageVisit: window.McxSiteInterceptOnExit.parameters.pageVisit,
+      pageVisit: window.McxSiteInterceptOnExit.parameters.pageVisit,
+      enabled: window.McxSiteInterceptOnExit.parameters.enabled,
     })
+  }
+
+  setInitialSiteInterceptParameters(){
+    let params = localStorage.params ? JSON.parse(localStorage.params) : this.state;
+
+    let surveyURL = params.surveyURL || this.state.surveyURL;
+    let waitUntilClose = params.waitUntilClose || this.state.waitUntilClose; 
+    let invitationID = params.invitationID || this.state.invitationID; 
+    let probability = params.probability || this.state.probability; 
+    let width = params.width || this.state.width; 
+    let height = params.height || this.state.height; 
+    let expireDaysIfYes = params.expireDaysIfYes || this.state.expireDaysIfYes; 
+    let expireDaysIfNo = params.expireDaysIfNo || this.state.expireDaysIfNo; 
+    let delay = params.delay || this.state.delay; 
+    let pageVisit = params.pageVisit || this.state.pageVisit; 
+    let enabled = params.enabled || this.state.enabled;
+
+    this.setState({surveyURL, waitUntilClose, invitationID, probability, width, height, expireDaysIfYes, expireDaysIfNo, delay, pageVisit, enabled}, this.saveSiteInterceptParametersToWindow);
   }
 
   saveSiteInterceptParametersToWindow(){
@@ -64,25 +94,50 @@ class App extends Component {
     window.McxSiteInterceptOnExit.parameters.delay = this.state.delay; 
     window.McxSiteInterceptOnExit.parameters.pageVisit = this.state.pageVisit; 
     window.McxSiteInterceptOnExit.parameters.enabled = this.state.enabled;
+    
+    //We'll also save it to localStorage so that it carries forward in future visits
+    localStorage.params = JSON.stringify({
+      surveyURL: this.state.surveyURL,
+      waitUntilClose: this.state.waitUntilClose, 
+      invitationID: this.state.invitationID, 
+      probability: this.state.probability, 
+      width: this.state.width, 
+      height: this.state.height, 
+      expireDaysIfYes: this.state.expireDaysIfYes, 
+      expireDaysIfNo: this.state.expireDaysIfNo, 
+      delay: this.state.delay, 
+      pageVisit: this.state.pageVisit, 
+      enabled: this.state.enabled
+    })
   }
 
-  deleteCookie(){
+  deleteCookies(){
     document.cookie = "mcxSurveyQuarantine=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+    document.cookie = "McxPageVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    delete sessionStorage.mcxRandom;
   }
 
   resetPageCount(){
     document.cookie = "McxPageVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   }
 
-  // getCookie(name) {
-  //   var value = "; " + document.cookie;
-  //   var parts = value.split("; " + name + "=");
-  //   if (parts.length == 2) {
-  //     this.setState({
-  //       [name]: parts.pop().split(";").shift()
-  //     })
-  //   } 
-  // }
+  /*
+  getCookie(name) {
+    let value = "; " + document.cookie;
+    let parts = value.split("; " + name + "=");
+    let result;
+    if (parts.length == 2) {
+      if (parts[1].indexOf(';') > -1){
+        result = parts[1].split(';')[0];
+      }else{
+        result = parts[1];
+      }
+    } 
+    this.setState({
+      [name]: result
+    })
+  }
+  */
 
   saveSettings(){
     this.saveSiteInterceptParametersToWindow();
@@ -94,6 +149,7 @@ class App extends Component {
       <div className="App">
 
         <Header toggleSettingsModal={this.toggleSettingsModal} />
+
         { router }
 
         <SurveyInvite />
@@ -160,8 +216,8 @@ class App extends Component {
                 <input className='settings_input_number' value={this.state.expireDaysIfNo} onChange={(e) => this.setState({expireDaysIfNo: e.target.value})} type='number' />
               </div>
 
-              <div className='settings_btn settings_reset' onClick={this.resetPageCount} >Reset Page Count</div>
-              <div className='settings_btn settings_delete' onClick={this.deleteCookie} >Delete Cookie</div>
+              {/* <div className='settings_btn settings_reset' onClick={this.resetPageCount} >Reset Page Count</div> */}
+              <div className='settings_btn settings_delete' onClick={this.deleteCookies} >Delete Cookies</div>
               <div className='settings_btn settings_save' onClick={this.saveSettings} >Save & Close</div>
 
             </div>

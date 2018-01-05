@@ -8,7 +8,7 @@
   width: 500px;
   background: #ccc;
   position: fixed;
-  top: calc(50% - 240px);
+  top: 180px;
   left: calc(50% - 250px);
   padding: 50px 15px 30px 15px;
   border-radius: 5px;
