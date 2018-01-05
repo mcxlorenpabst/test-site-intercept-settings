@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import InputSetting from './InputSetting.js';
+import SelectSetting from './SelectSetting.js';
 
 class Settings extends Component {
   render() {
@@ -8,18 +9,9 @@ class Settings extends Component {
 
             <p className='settings_close' onClick={this.props.closeSettingsModal}>X</p>
 
-            <div className='setting_wrapper'>
-                <p>Survey URL:</p>
-                <input className='settings_input_long' value={this.props.state.surveyURL} onChange={(e)=> this.props.setState({surveyURL: e.target.value})} />
-            </div>
+            <InputSetting title='Survey URL:' class='settings_input_long' value={this.props.state.surveyURL} change={(e)=> this.props.setState({surveyURL: e.target.value})} />
 
-            <div className='setting_wrapper'>
-                <p>Enabled:</p>
-                <select value={this.props.state.enabled} onChange={(e)=> this.props.setState({enabled: e.target.value})} >
-                    <option>true</option>
-                    <option>false</option>
-                </select>
-            </div>
+            <SelectSetting title='Enabled:' value={this.props.state.enabled} change={(e)=> this.props.setState({enabled: e.target.value})} options={['true', 'false']} />
 
             <div className='setting_wrapper'>
                 <p>Probability (%):</p>

@@ -3,7 +3,7 @@ import router from './router';
 
 import Header from './components/Header/Header.js';
 import SurveyInvite from './components/SurveyInvite/SurveyInvite.js';
-import Settings from './components/Settings/Settings.js';
+import SettingsModal from './components/SettingsModal/SettingsModal.js';
 
 import './reset.css';
 import './App.css';
@@ -119,7 +119,7 @@ class App extends Component {
     window.McxSiteInterceptOnExit.parameters.expireDaysIfNo = this.state.expireDaysIfNo; 
     window.McxSiteInterceptOnExit.parameters.delay = this.state.delay; 
     window.McxSiteInterceptOnExit.parameters.pageVisit = this.state.pageVisit; 
-    window.McxSiteInterceptOnExit.parameters.enabled = this.state.enabled;
+    window.McxSiteInterceptOnExit.parameters.enabled = JSON.parse(this.state.enabled);
     
     //We'll also save it to localStorage so that it carries forward in future visits
     localStorage.params = JSON.stringify({
@@ -197,7 +197,7 @@ class App extends Component {
 
         { 
           this.state.showSettingsModal ? 
-            <Settings setState={this.updateState} state={this.state} closeSettingsModal={this.closeSettingsModal} updateOpenSurveyType={this.updateOpenSurveyType} resetPageCount={this.resetPageCount} deleteCookies={this.deleteCookies} saveSettings={this.saveSettings} />
+            <SettingsModal setState={this.updateState} state={this.state} closeSettingsModal={this.closeSettingsModal} updateOpenSurveyType={this.updateOpenSurveyType} resetPageCount={this.resetPageCount} deleteCookies={this.deleteCookies} saveSettings={this.saveSettings} />
           : null
         }
 
