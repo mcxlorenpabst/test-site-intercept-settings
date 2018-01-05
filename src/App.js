@@ -3,6 +3,7 @@ import router from './router';
 
 import Header from './components/Header/Header.js';
 import SurveyInvite from './components/SurveyInvite/SurveyInvite.js';
+import Settings from './components/Settings/Settings.js';
 
 import './reset.css';
 import './App.css';
@@ -29,6 +30,7 @@ class App extends Component {
       openSurveyType: 'New Tab'
     }
 
+    this.updateState = this.updateState.bind(this);
     this.toggleSettingsModal = this.toggleSettingsModal.bind(this);
     this.closeSettingsModal = this.closeSettingsModal.bind(this);
     this.saveSettings = this.saveSettings.bind(this);
@@ -41,6 +43,10 @@ class App extends Component {
     document.cookie = "McxPageVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "mcxSurveyQuarantine=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
     delete sessionStorage.mcxRandom;
+  }
+
+  updateState(obj){
+    this.setState(obj)
   }
 
   toggleSettingsModal(){
@@ -104,7 +110,7 @@ class App extends Component {
 
   saveSiteInterceptParametersToWindow(){
     window.McxSiteInterceptOnExit.parameters.surveyURL = this.state.surveyURL; 
-    window.McxSiteInterceptOnExit.parameters.waitUntilClose = this.state.waitUntilClose; 
+    window.McxSiteInterceptOnExit.parameters.waitUntilClose = JSON.parse(this.state.waitUntilClose); 
     window.McxSiteInterceptOnExit.parameters.invitationID = this.state.invitationID; 
     window.McxSiteInterceptOnExit.parameters.probability = this.state.probability; 
     window.McxSiteInterceptOnExit.parameters.width = this.state.width; 
@@ -189,90 +195,9 @@ class App extends Component {
 
         <SurveyInvite acceptSurvey={this.acceptSurvey} />
 
-        {
+        { 
           this.state.showSettingsModal ? 
-            <div className='settings'>
-
-              <p className='settings_close' onClick={this.closeSettingsModal} >X</p>
-
-              <div className='setting_wrapper'>
-                <p>Survey URL:</p>
-                <input className='settings_input_long' value={this.state.surveyURL} onChange={(e) => this.setState({surveyURL: e.target.value})} />
-              </div>
-
-              <div className='setting_wrapper'>
-                <p>Enabled:</p>
-                <select value={this.state.enabled} onChange={(e) => this.setState({enabled: e.target.value})} >
-                  <option>true</option>
-                  <option>false</option>
-                </select>
-              </div>
-
-              <div className='setting_wrapper'>
-                <p>Probability (%):</p>
-                <input className='settings_input_number' value={this.state.probability} onChange={(e) => this.setState({probability: e.target.value})} type='number' />
-              </div>
-
-              <div className='setting_wrapper'>
-                <p>Page Visit:</p>
-                <input className='settings_input_number' value={this.state.pageVisit} onChange={(e) => this.setState({pageVisit: e.target.value})} type='number' />
-              </div>
-
-              <div className='setting_wrapper'>
-                <p>Delay (in seconds):</p>
-                <input className='settings_input_number' value={this.state.delay/1000} onChange={(e) => this.setState({delay: (e.target.value * 1000)})} type='number' />
-              </div>
-
-              <div className='setting_wrapper'>
-                <p>Open Survey In:</p>
-                <select value={this.state.openSurveyType} onChange={(e) => this.updateOpenSurveyType(e)} >
-                  <option>New Tab</option>
-                  <option>Pop Up</option>
-                </select>
-              </div>
-
-              {
-                this.state.openSurveyType === 'New Tab' ? null
-                : <div className='setting_wrapper'>
-                    <p>Wait Until Close:</p>
-                    <select value={this.state.waitUntilClose} onChange={(e) => this.setState({waitUntilClose: e.target.value})} >
-                      <option>true</option>
-                      <option>false</option>
-                    </select>
-                  </div>
-              }
-
-              {
-                this.state.openSurveyType === 'New Tab' ? null
-                : <div className='setting_wrapper'>
-                    <p>Survey Width (pixels):</p>
-                    <input className='settings_input_number' value={this.state.width} onChange={(e) => this.setState({width: e.target.value})} type='number' />
-                  </div>
-              }
-
-              {
-                this.state.openSurveyType === 'New Tab' ? null
-                : <div className='setting_wrapper'>
-                    <p>Survey Height (pixels):</p>
-                    <input className='settings_input_number' value={this.state.height} onChange={(e) => this.setState({height: e.target.value})} type='number' />
-                  </div>
-              }
-
-              <div className='setting_wrapper'>
-                <p>Cookie Duration If Accepted (in days):</p>
-                <input className='settings_input_number' value={this.state.expireDaysIfYes} onChange={(e) => this.setState({expireDaysIfYes: e.target.value})} type='number' />
-              </div>
-
-              <div className='setting_wrapper'>
-                <p>Cookie Duration If Declined (in days):</p>
-                <input className='settings_input_number' value={this.state.expireDaysIfNo} onChange={(e) => this.setState({expireDaysIfNo: e.target.value})} type='number' />
-              </div>
-
-              {/* <div className='settings_btn settings_reset' onClick={this.resetPageCount} >Reset Page Count</div> */}
-              <div className='settings_btn settings_delete' onClick={this.deleteCookies} >Delete Cookies</div>
-              <div className='settings_btn settings_save' onClick={this.saveSettings} >Save & Close</div>
-
-            </div>
+            <Settings setState={this.updateState} state={this.state} closeSettingsModal={this.closeSettingsModal} updateOpenSurveyType={this.updateOpenSurveyType} resetPageCount={this.resetPageCount} deleteCookies={this.deleteCookies} saveSettings={this.saveSettings} />
           : null
         }
 
