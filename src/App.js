@@ -11,7 +11,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      showSettingsModal: true,
+      showSettingsModal: false,
       surveyURL: "https://alias.allegiancetech.com/cgi-bin/qwebcorporate.dll?idx=SXWD5F", 
       waitUntilClose: false, 
       invitationID: 'mcxInviteModal', 
@@ -25,7 +25,8 @@ class App extends Component {
       expireDaysIfYes: 60,
       expireDaysIfNo: 30,
       enabled: true,
-      McxPageVisit: 1
+      McxPageVisit: 1,
+      openSurveyType: 'New Tab'
     }
 
     this.toggleSettingsModal = this.toggleSettingsModal.bind(this);
@@ -36,7 +37,8 @@ class App extends Component {
   componentDidMount(){
     this.setInitialSiteInterceptParameters();
     window.McxSiteInterceptOnExit.onPageLoad();
-    this.resetPageCount();
+    document.cookie = "McxPageVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "mcxSurveyQuarantine=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
     delete sessionStorage.mcxRandom;
   }
 
@@ -62,6 +64,23 @@ class App extends Component {
       pageVisit: window.McxSiteInterceptOnExit.parameters.pageVisit,
       enabled: window.McxSiteInterceptOnExit.parameters.enabled,
     })
+  }
+
+  updateOpenSurveyType(e){
+    let newVal = e.target.value;
+    if (newVal === 'New Tab'){
+      this.setState({
+        openSurveyType: newVal,
+        width: undefined,
+        height: undefined
+      })
+    }else{
+      this.setState({
+        openSurveyType: newVal,
+        width: 900,
+        height: 600
+      })
+    }
   }
 
   setInitialSiteInterceptParameters(){
@@ -197,14 +216,27 @@ class App extends Component {
               </div>
 
               <div className='setting_wrapper'>
-                <p>Survey Width (pixels):</p>
-                <input className='settings_input_number' value={this.state.width} onChange={(e) => this.setState({width: e.target.value})} type='number' />
+                <p>Open Survey In:</p>
+                <select value={this.state.openSurveyType} onChange={(e) => this.updateOpenSurveyType(e)} >
+                  <option>New Tab</option>
+                  <option>Pop Up</option>
+                </select>
               </div>
 
-              <div className='setting_wrapper'>
-                <p>Survey Height (pixels):</p>
-                <input className='settings_input_number' value={this.state.height} onChange={(e) => this.setState({height: e.target.value})} type='number' />
-              </div>
+              {
+                this.state.openSurveyType === 'New Tab' ? null
+                : <div className='setting_wrapper'>
+                    <p>Survey Width (pixels):</p>
+                    <input className='settings_input_number' value={this.state.width} onChange={(e) => this.setState({width: e.target.value})} type='number' />
+                  </div>
+              }
+              {
+                this.state.openSurveyType === 'New Tab' ? null
+                : <div className='setting_wrapper'>
+                    <p>Survey Height (pixels):</p>
+                    <input className='settings_input_number' value={this.state.height} onChange={(e) => this.setState({height: e.target.value})} type='number' />
+                  </div>
+              }
 
               <div className='setting_wrapper'>
                 <p>Cookie Duration If Accepted (in days):</p>
