@@ -4,6 +4,14 @@ import './Home.css';
 import Customer from './Customer/Customer.js';
 
 class Home extends Component {
+  constructor(props){
+    super(props);
+    this.state = {}
+  }
+  
+  componentDidMount(){
+    window.McxSiteInterceptOnExit.onPageLoad();
+  }
 
   render() {
     return (

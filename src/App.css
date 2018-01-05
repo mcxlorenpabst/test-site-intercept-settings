@@ -6,12 +6,11 @@
 
 .settings{
   width: 500px;
-  height: 400px;
   background: #ccc;
   position: fixed;
   top: calc(50% - 240px);
   left: calc(50% - 250px);
-  padding: 50px 15px 0px 15px;
+  padding: 50px 15px 30px 15px;
   border-radius: 5px;
   box-shadow: 3px 3px 5px black;
 }
@@ -51,23 +50,36 @@
   display: inline-block;
 }
 
-.settings_save{
+.settings_btn{
   width: 180px;
   height: 30px;
   line-height: 30px;
-  position: absolute;
-  bottom: 30px;
-  left: 160px;
   text-align: center;
   font-size: 18px;
   font-weight: bold;
-  background: #f5921e;
   color: white;
   border-radius: 4px;
   box-shadow: 1px 1px 2px black;
   cursor: pointer;
+  background: #494949;
+  margin: 10px auto;
 }
 
-.settings_save:active{
+.settings_btn:active{
   box-shadow: inset 1px 1px 2px black;
+}
+
+/* .settings_delete{
+  margin: 5px auto;
+}
+
+.settings_reset{
+  margin: 5px auto;
+} */
+
+.settings_save{
+  /* position: absolute;
+  bottom: 30px;
+  left: 160px; */
+  background: #f5921e;
 }

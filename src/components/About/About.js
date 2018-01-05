@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import './About.css';
 
 class About extends Component {
+  constructor(props){
+    super(props);
+    this.state = {}
+  }
+  
+  componentDidMount(){
+    window.McxSiteInterceptOnExit.onPageLoad();
+  }
+
   render() {
     return (
       <section className='about'>
