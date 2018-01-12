@@ -1,0 +1,72 @@
+
+.designer{
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    padding: 60px 15px 30px 15px;
+}
+
+.designer_close{
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    right: 80px;
+    top: 80px;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    text-shadow: 2px 2px 2px black;
+}
+
+.designer_settings{
+    width: 500px;
+    min-height: calc(100vh - 50px);
+    position: absolute;
+    left: 0px;
+    top: 60px;
+    background: #ccc;
+    padding: 5px 15px;
+}
+
+.designer_setting{
+    width: 100%;
+    height: auto;
+    padding: 10px 0px 10px 0px;
+    border-bottom: 1px solid #333;
+}
+
+.designer_setting input{
+    width: 450px;
+    height: 20px;
+    line-height: 20px;
+    padding-left: 3px;
+}
+
+.designer_setting textarea{
+    width: 450px;
+    height: 60px;
+    padding: 2px;
+    resize: none;
+}
+
+.designer_modal{
+    width: 700px;
+    min-height: calc(100vh - 50px);
+    position: absolute;
+    left: 500px;
+    top: 60px;
+}
+
+.designer_modal_survey{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(200, 200, 200, 0.4);
+    z-index: 190;
+}

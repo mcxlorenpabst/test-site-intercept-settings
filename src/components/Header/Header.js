@@ -13,6 +13,7 @@ class Header extends Component {
             <Link to='/'>Home</Link>
             <Link to='/about'>About</Link>
             <Link to='/contact'>Contact</Link>
+            {/* <Link to='/designer'>Designer</Link> */}
         </ul>
       </section>
     );

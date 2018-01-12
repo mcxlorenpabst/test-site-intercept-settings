@@ -71,6 +71,7 @@ class Settings extends Component {
             </div>
 
             {/* <div className='settings_btn settings_reset' onClick={this.props.resetPageCount}>Reset Page Count</div> */}
+            <div className='settings_btn settings_designer' onClick={this.props.openDesigner}>Designer</div>
             <div className='settings_btn settings_delete' onClick={this.props.deleteCookies}>Delete Cookies</div>
             <div className='settings_btn settings_save' onClick={this.props.saveSettings}>Save & Close</div>
 

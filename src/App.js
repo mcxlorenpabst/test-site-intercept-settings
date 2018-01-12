@@ -4,6 +4,7 @@ import router from './router';
 import Header from './components/Header/Header.js';
 import SurveyInvite from './components/SurveyInvite/SurveyInvite.js';
 import SettingsModal from './components/SettingsModal/SettingsModal.js';
+import Designer from './components/Designer/Designer.js';
 
 import './reset.css';
 import './App.css';
@@ -27,13 +28,21 @@ class App extends Component {
       expireDaysIfNo: 30,
       enabled: true,
       McxPageVisit: 1,
-      openSurveyType: 'New Tab'
+      openSurveyType: 'New Tab',
+      showDesigner: false,
+      logoURL: 'https://www.maritzcx.com/wp-content/themes/allegiance/images/logo.svg',
+      logoWidth: '220px',
+      logoHeight: 'auto',
+      logoMargin: '50px 0px 60px 140px',
+      message: 'Will you help us improve your experience by taking a short 30 second survey?',
     }
 
     this.updateState = this.updateState.bind(this);
     this.toggleSettingsModal = this.toggleSettingsModal.bind(this);
     this.closeSettingsModal = this.closeSettingsModal.bind(this);
     this.saveSettings = this.saveSettings.bind(this);
+    this.openDesigner = this.openDesigner.bind(this);
+    this.closeDesigner = this.closeDesigner.bind(this);
     this.acceptSurvey = this.acceptSurvey.bind(this);
   }
 
@@ -170,6 +179,19 @@ class App extends Component {
     this.closeSettingsModal();
   }
 
+  openDesigner(){
+    this.setState({
+      showDesigner: true,
+      showSettingsModal: false,
+    })
+  }
+
+  closeDesigner(){
+    this.setState({
+      showDesigner: false
+    })
+  }
+
   acceptSurvey(){
     if (this.state.openSurveyType === 'New Tab'){
       let params = window.McxSiteInterceptOnExit.parameters;
@@ -188,17 +210,23 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
+      
         <Header toggleSettingsModal={this.toggleSettingsModal} />
 
         { router }
 
-        <SurveyInvite acceptSurvey={this.acceptSurvey} />
+        <SurveyInvite acceptSurvey={this.acceptSurvey} state={this.state} />
 
         { 
           this.state.showSettingsModal ? 
-            <SettingsModal setState={this.updateState} state={this.state} closeSettingsModal={this.closeSettingsModal} updateOpenSurveyType={this.updateOpenSurveyType} resetPageCount={this.resetPageCount} deleteCookies={this.deleteCookies} saveSettings={this.saveSettings} />
+            <SettingsModal setState={this.updateState} state={this.state} closeSettingsModal={this.closeSettingsModal} updateOpenSurveyType={this.updateOpenSurveyType} resetPageCount={this.resetPageCount} deleteCookies={this.deleteCookies} saveSettings={this.saveSettings} openDesigner={this.openDesigner} closeDesigner={this.closeDesigner} />
           : null
+        }
+
+        {
+          this.state.showDesigner ? 
+            <Designer closeDesigner={this.closeDesigner} state={this.state} setState={this.updateState} />
+          : null 
         }
 
       </div>
