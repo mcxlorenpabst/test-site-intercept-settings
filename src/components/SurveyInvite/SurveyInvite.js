@@ -29,7 +29,7 @@ class SurveyInvite extends Component {
             <p className='modal_words'>{state.message}</p>
 
             <div className='modal_yes_wrapper' onClick={this.props.acceptSurvey}>
-              <a className='modal_yes' href='https://alias.allegiancetech.com/cgi-bin/qwebcorporate.dll?idx=SXWD5F' target='_blank' rel="noopener noreferrer">Yes</a>
+              <a className='modal_yes' href='https://alias.allegiancetech.com/cgi-bin/qwebcorporate.dll?idx=SXWD5F' target='_blank' rel="noopener noreferrer" style={{background: state.acceptBackground, marginLeft: state.acceptMarginLeft}}>{state.acceptText}</a>
             </div>
 
             <p className='modal_words2'>We appreciate your feedback.&nbsp; 

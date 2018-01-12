@@ -60,14 +60,12 @@
 .modal_yes{
     color: black !important;
     text-decoration: none;
-    border: 1px solid orange;
     padding: 10px 40px;
     font-size: 20px;
     font-weight: bold;
-    background: #f5921e;
     border-radius: 6px;
-    position: absolute;
-    left: 195px;
+    /* background: #f5921e; */
+    /* margin-left: 195px; */
 }
 
 .modal_words2{

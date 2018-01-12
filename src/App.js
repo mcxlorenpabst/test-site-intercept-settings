@@ -35,6 +35,9 @@ class App extends Component {
       logoHeight: 'auto',
       logoMargin: '50px 0px 60px 140px',
       message: 'Will you help us improve your experience by taking a short 30 second survey?',
+      acceptText: 'Yes',
+      acceptBackground: '#f5921e',
+      acceptMarginLeft: '195px',
     }
 
     this.updateState = this.updateState.bind(this);
@@ -192,6 +195,11 @@ class App extends Component {
     })
   }
 
+  saveDesigner(){
+    this.saveSettings();
+    this.closeDesigner();
+  }
+
   acceptSurvey(){
     if (this.state.openSurveyType === 'New Tab'){
       let params = window.McxSiteInterceptOnExit.parameters;
@@ -225,7 +233,7 @@ class App extends Component {
 
         {
           this.state.showDesigner ? 
-            <Designer closeDesigner={this.closeDesigner} state={this.state} setState={this.updateState} />
+            <Designer closeDesigner={this.closeDesigner} state={this.state} setState={this.updateState} saveDesigner={this.saveDesigner} />
           : null 
         }
 

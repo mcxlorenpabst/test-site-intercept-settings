@@ -42,6 +42,23 @@ class Designer extends Component {
                         <textarea value={state.message} onChange={(e) => this.props.setState({message: e.target.value})} />
                     </div>
 
+                    <div className='designer_setting'>
+                        <p>Accept Button Text:</p>
+                        <input value={state.acceptText} onChange={(e) => this.props.setState({acceptText: e.target.value})} />
+                    </div>
+
+                    <div className='designer_setting'>
+                        <p>Accept Button Color:</p>
+                        <input value={state.acceptBackground} onChange={(e) => this.props.setState({acceptBackground: e.target.value})} />
+                    </div>
+
+                    <div className='designer_setting'>
+                        <p>Accept Button Left:</p>
+                        <input value={state.acceptMarginLeft} onChange={(e) => this.props.setState({acceptMarginLeft: e.target.value})} />
+                    </div>
+
+                    <div className='settings_btn designer_save' onClick={this.props.saveDesigner} >Save</div>
+
                 </div>
 
                 <div className='designer_modal'>
@@ -50,7 +67,7 @@ class Designer extends Component {
                         <img src={state.logoURL} alt='MaritzCX logo' className='modal_header_logo' style={{width: state.logoWidth, height: state.logoHeight, margin: state.logoMargin}} />
                         <p className='modal_words'>{state.message}</p>
                         <div className='modal_yes_wrapper'>
-                            <a className='modal_yes' href='https://alias.allegiancetech.com/cgi-bin/qwebcorporate.dll?idx=SXWD5F' target='_blank' rel="noopener noreferrer">Yes</a>
+                            <a className='modal_yes' href='https://alias.allegiancetech.com/cgi-bin/qwebcorporate.dll?idx=SXWD5F' target='_blank' rel="noopener noreferrer" style={{background: state.acceptBackground, marginLeft: state.acceptMarginLeft}}>{state.acceptText}</a>
                         </div>
                         <p className='modal_words2'>We appreciate your feedback.&nbsp; 
                             <a href="https://www.maritzcx.com/privacy-policy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
