@@ -46,6 +46,7 @@ class App extends Component {
     this.saveSettings = this.saveSettings.bind(this);
     this.openDesigner = this.openDesigner.bind(this);
     this.closeDesigner = this.closeDesigner.bind(this);
+    this.saveDesigner = this.saveDesigner.bind(this);
     this.acceptSurvey = this.acceptSurvey.bind(this);
   }
 
@@ -116,8 +117,16 @@ class App extends Component {
     let delay = params.delay || this.state.delay; 
     let pageVisit = params.pageVisit || this.state.pageVisit; 
     let enabled = params.enabled || this.state.enabled;
+    let logoURL = params.logoURL || this.state.logoURL;
+    let logoWidth = params.logoWidth || this.state.logoWidth;
+    let logoHeight = params.logoHeight || this.state.logoHeight;
+    let logoMargin = params.logoMargin || this.state.logoMargin;
+    let message = params.message || this.state.message;
+    let acceptText = params.acceptText || this.state.acceptText;
+    let acceptBackground = params.acceptBackground || this.state.acceptBackground;
+    let acceptMarginLeft = params.acceptMarginLeft || this.state.acceptMarginLeft;
 
-    this.setState({surveyURL, waitUntilClose, invitationID, probability, width, height, expireDaysIfYes, expireDaysIfNo, delay, pageVisit, enabled}, this.saveSiteInterceptParametersToWindow);
+    this.setState({surveyURL, waitUntilClose, invitationID, probability, width, height, expireDaysIfYes, expireDaysIfNo, delay, pageVisit, enabled, logoURL, logoWidth, logoHeight, logoMargin, message, acceptText, acceptBackground, acceptMarginLeft}, this.saveSiteInterceptParametersToWindow);
   }
 
   saveSiteInterceptParametersToWindow(){
@@ -132,6 +141,14 @@ class App extends Component {
     window.McxSiteInterceptOnExit.parameters.delay = this.state.delay; 
     window.McxSiteInterceptOnExit.parameters.pageVisit = this.state.pageVisit; 
     window.McxSiteInterceptOnExit.parameters.enabled = JSON.parse(this.state.enabled);
+    window.McxSiteInterceptOnExit.parameters.logoURL = this.state.logoURL;
+    window.McxSiteInterceptOnExit.parameters.logoWidth = this.state.logoWidth;
+    window.McxSiteInterceptOnExit.parameters.logoHeight = this.state.logoHeight;
+    window.McxSiteInterceptOnExit.parameters.logoMargin = this.state.logoMargin;
+    window.McxSiteInterceptOnExit.parameters.message = this.state.message;
+    window.McxSiteInterceptOnExit.parameters.acceptText = this.state.acceptText;
+    window.McxSiteInterceptOnExit.parameters.acceptBackground = this.state.acceptBackground;
+    window.McxSiteInterceptOnExit.parameters.acceptMarginLeft = this.state.acceptMarginLeft;
     
     //We'll also save it to localStorage so that it carries forward in future visits
     localStorage.params = JSON.stringify({
@@ -145,7 +162,15 @@ class App extends Component {
       expireDaysIfNo: this.state.expireDaysIfNo, 
       delay: this.state.delay, 
       pageVisit: this.state.pageVisit, 
-      enabled: this.state.enabled
+      enabled: this.state.enabled,
+      logoURL: this.state.logoURL,
+      logoWidth: this.state.logoWidth,
+      logoHeight: this.state.logoHeight,
+      logoMargin: this.state.logoMargin,
+      message: this.state.message,
+      acceptText: this.state.acceptText,
+      acceptBackground: this.state.acceptBackground,
+      acceptMarginLeft: this.state.acceptMarginLeft,
     })
   }
 
